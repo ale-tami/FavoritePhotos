@@ -33,6 +33,12 @@ static PlistManager *plistManager = nil;
     }
 }
 
+- (NSMutableArray*) deserializeData
+{
+    NSURL *plistUrl = [self.directory URLByAppendingPathComponent:@"favorites.plist"];
+    return [NSMutableArray arrayWithContentsOfURL:plistUrl];
+}
+
 
 - (void) serializeFavoriteImage: (UIImage *)image
 {
@@ -49,10 +55,21 @@ static PlistManager *plistManager = nil;
     
 }
 
-- (NSMutableArray*) deserializeData
+- (NSArray*) removeFromFavorites:(UIImage *)image
 {
-    NSURL *plistUrl = [self.directory URLByAppendingPathComponent:@"favorites.plist"];
-    return [NSMutableArray arrayWithContentsOfURL:plistUrl];
+     NSURL *plistUrl = [self.directory URLByAppendingPathComponent:@"favorites.plist"];
+    
+    NSMutableArray * newArray = (NSMutableArray*)[self deserializeFavoriteImages];
+    [newArray removeObject:image];
+    NSMutableArray * aux = [NSMutableArray new];
+    
+    for (UIImage *image in newArray) {
+        [aux addObject:UIImagePNGRepresentation(image)];
+    }
+    
+    [newArray writeToURL:plistUrl atomically:YES];
+    
+    return newArray;
 }
 
 - (NSArray*) deserializeFavoriteImages
@@ -67,5 +84,15 @@ static PlistManager *plistManager = nil;
     
     return (NSArray*)aux ;
 }
+
+//- (BOOL) image: (UIImage*)image isInArray:(NSArray *) array
+//{
+//    NSURL *plistUrl = [self.directory URLByAppendingPathComponent:@"favorites.plist"];
+//    [NSArray arrayWithContentsOfURL:plistUrl]
+//    
+//    return YES;
+//}
+
+
 
 @end

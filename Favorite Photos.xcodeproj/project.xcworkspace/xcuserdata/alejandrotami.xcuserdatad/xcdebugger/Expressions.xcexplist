@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[ViewController collectionView:cellForItemAtIndexPath:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.hash">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FavoritesViewController collectionView:cellForItemAtIndexPath:]:FavoritesViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FavoritesViewController collectionView:numberOfItemsInSection:]:FavoritesViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

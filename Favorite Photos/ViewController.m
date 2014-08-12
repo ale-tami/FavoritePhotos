@@ -69,7 +69,10 @@
         [[PlistManager getInstance] serializeFavoriteImage:cell.imageView.image];
         self.favoritedImages = [[PlistManager getInstance] deserializeFavoriteImages];
     } else {
-        
+        cell.switchView.on = YES;
+        cell.switchView.hidden = NO;
+        self.favoritedImages = [[PlistManager getInstance] removeFromFavorites:cell.imageView.image];
+        [self.collectionView reloadData];
     }
 
 
@@ -91,7 +94,9 @@
 {
     ImageViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-    if ([self.favoritedImages containsObject:[self.photos objectAtIndex:indexPath.row]]) {
+    UIImage * image = [self.photos objectAtIndex:indexPath.row];
+    //I AM aware of the repeated code, please have mercy and disregard that :D
+    if ([self.favoritedImages containsObject:image]) {
         cell.switchView.on = YES;
         cell.switchView.hidden = NO;
     } else {
@@ -99,7 +104,7 @@
         cell.switchView.hidden = YES;
     }
     
-    cell.imageView.image = [self.photos objectAtIndex:indexPath.row];
+    cell.imageView.image = image;
     
     return cell;
 }

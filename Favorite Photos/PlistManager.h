@@ -14,5 +14,6 @@
 
 - (void) serializeFavoriteImage: (UIImage *)image;
 - (NSArray*) deserializeFavoriteImages;
+- (NSArray*) removeFromFavorites:(UIImage *)image;
 
 @end
